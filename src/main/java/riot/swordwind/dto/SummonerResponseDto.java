@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
-public class RiotSummonerResponseDto {
+public class SummonerResponseDto {
 
     private String accountId;
     private Long profileIconId;

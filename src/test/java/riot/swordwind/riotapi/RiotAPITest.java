@@ -7,8 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
-import riot.swordwind.dto.RiotMatchDetailResponseDto;
-import riot.swordwind.dto.RiotSummonerResponseDto;
+import riot.swordwind.dto.MatchDetailResponseDto;
+import riot.swordwind.dto.SummonerResponseDto;
 import riot.swordwind.service.RiotApiService;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,7 +26,7 @@ public class RiotAPITest {
     @Test
     @DisplayName("Riot Summoner API 200")
     public void findSummonerNameSuccess() {
-        ResponseEntity<RiotSummonerResponseDto> response = riotAPIService.findSummonerByRiotAPI("자조용해");
+        ResponseEntity<SummonerResponseDto> response = riotAPIService.requestFindSummonerBySummonerName("자조용해");
 
         System.out.println("response = " + response);
         HttpStatusCode statusCode = response.getStatusCode();
@@ -36,7 +36,7 @@ public class RiotAPITest {
     @Test
     @DisplayName("error Riot Summoner API")
     public void findSummonerNameNotFound() {
-        assertThrows(HttpClientErrorException.class, () -> riotAPIService.findSummonerByRiotAPI("자조용해2"));
+        assertThrows(HttpClientErrorException.class, () -> riotAPIService.requestFindSummonerBySummonerName("자조용해2"));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class RiotAPITest {
     public void findMatchListIdSuccess() {
         String puuid = "kP1g5l3oLaxdAjpuyIB7hTdLff-6THnUcs4Zs2deyfLsWM1bmEoLya_oN7chnS8cH8BeG9zwHaArLw";
 
-        ResponseEntity response = riotAPIService.findMatchIdList(puuid);
+        ResponseEntity response = riotAPIService.requestFindMatchList(puuid);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
     }
 
@@ -53,15 +53,15 @@ public class RiotAPITest {
     public void findMatchListIdFail() {
         String puuid = "kP1g5l3oLaxdAjpuyIB7hTdLff-6THnUcs4Zs2deyfLsWM1bmEoLya_oN7chn123123123123S8cH8BeG9zwHaArLw";
 
-        assertThrows(HttpClientErrorException.class, () -> riotAPIService.findMatchIdList(puuid));
+        assertThrows(HttpClientErrorException.class, () -> riotAPIService.requestFindMatchList(puuid));
     }
 
     @Test
     @DisplayName("match detail api success")
     public void findMatchDetailSuccess() {
         String matchId = "KR_6972814243";
-        ResponseEntity<RiotMatchDetailResponseDto> response = riotAPIService.findMatchDetail(matchId);
-        RiotMatchDetailResponseDto body = response.getBody();
+        ResponseEntity<MatchDetailResponseDto> response = riotAPIService.requestFindMatchDetail(matchId);
+        MatchDetailResponseDto body = response.getBody();
 
         // detail 정보
         assertThat(body.getInfo().getParticipants()).isNotEmpty();
@@ -79,6 +79,6 @@ public class RiotAPITest {
     @DisplayName("match detail api fail")
     public void findMatchDetailFail() {
         String matchId = "INVALID_MATCH_ID";
-        assertThrows(HttpClientErrorException.class, () -> riotAPIService.findMatchDetail(matchId));
+        assertThrows(HttpClientErrorException.class, () -> riotAPIService.requestFindMatchDetail(matchId));
     }
 }

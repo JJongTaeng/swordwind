@@ -5,7 +5,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class RiotMatchDetailResponseDto {
+public class MatchDetailResponseDto {
 
     private MetadataDto metadata;
     private InfoDto info;
