@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import riot.swordwind.dto.MatchDetailResponseDto;
+import riot.swordwind.dto.RiotIdResponseDto;
 import riot.swordwind.dto.SummonerResponseDto;
 import riot.swordwind.service.RiotApiService;
 
@@ -32,6 +33,17 @@ public class RiotAPITest {
         HttpStatusCode statusCode = response.getStatusCode();
         assertThat(statusCode).isEqualTo(HttpStatusCode.valueOf(200));
     }
+
+    @Test
+    @DisplayName("Riot Id API 200")
+    public void findRiotIdSuccess() {
+        ResponseEntity<RiotIdResponseDto> response = riotAPIService.requestFindRiotIdByGameNameTag("자조용해", "KR1");
+
+        System.out.println("response = " + response.getBody());
+        HttpStatusCode statusCode = response.getStatusCode();
+        assertThat(statusCode).isEqualTo(HttpStatusCode.valueOf(200));
+    }
+
 
     @Test
     @DisplayName("error Riot Summoner API")
