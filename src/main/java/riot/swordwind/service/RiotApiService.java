@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import riot.swordwind.dto.MatchDetailResponseDto;
 import riot.swordwind.dto.RiotIdResponseDto;
-import riot.swordwind.dto.SummonerResponseDto;
 import riot.swordwind.entity.ApiKey;
 import riot.swordwind.repository.ApiKeyRepository;
 
@@ -43,19 +42,20 @@ public class RiotApiService {
         return res;
     }
 
-    public ResponseEntity<SummonerResponseDto> requestFindSummonerBySummonerName(String name) {
+    public ResponseEntity<RiotIdResponseDto> requestFindRiotIdByPuuid(String puuid) {
         RestClient customClient = RestClient.builder()
                 .defaultHeader("X-Riot-Token", API_KEY)
                 .build();
 
-        ResponseEntity<SummonerResponseDto> res = customClient.get()
-                .uri("https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{name}", name)
+        ResponseEntity<RiotIdResponseDto> res = customClient.get()
+                .uri("https://asia.api.riotgames.com/riot/account/v1/accounts/by-puuid/{puuid}", puuid)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .toEntity(SummonerResponseDto.class);
+                .toEntity(RiotIdResponseDto.class);
 
         return res;
     }
+
 
     public ResponseEntity<ArrayList> requestFindMatchList(String puuid) {
         RestClient customClient = RestClient.builder()

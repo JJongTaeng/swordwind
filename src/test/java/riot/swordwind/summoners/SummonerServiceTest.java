@@ -9,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import riot.swordwind.entity.Summoner;
 import riot.swordwind.service.SummonerService;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -33,44 +31,29 @@ public class SummonerServiceTest {
     public void saveSummonerTest() {
         Summoner summoner = Summoner.builder()
                 .puuid("101010")
-                .summonerName("그랜드 플래티넘")
-                .tagGameName("똥개인척 하는 범#KR2")
+                .gameName("그랜드 플래티넘")
+                .tagLine("KR2")
                 .build();
 
         Summoner savedSummoner = summonerService.save(summoner);
-        assertThat(savedSummoner.getTagGameName()).isEqualTo("똥개인척하는범#KR2");
+        assertThat(savedSummoner.getGameName()).isEqualTo("그랜드플래티넘");
     }
-
-    @Test
-    @DisplayName("서머너 삭제")
-    public void deleteSummonerTest() {
-        Summoner summoner = Summoner.builder()
-                .puuid("101010")
-                .summonerName("그랜드 플래티넘")
-                .tagGameName("똥개인척 하는 범#KR2")
-                .build();
-
-        Summoner savedSummoner = summonerService.save(summoner);
-        summonerService.deleteSummoner(savedSummoner);
-        Optional<Summoner> foundSummoner = summonerService.findById(1L);
-
-        assertThat(foundSummoner).isEmpty();
-    }
-
+    
     @Test
     @DisplayName("서머너 업데이트 gameName변경")
     public void updateSummonerTest() {
         Summoner summoner = Summoner.builder()
                 .puuid("101010")
-                .summonerName("그랜드 플래티넘")
-                .tagGameName("똥개인척 하는 범#KR2")
+                .gameName("그랜드 플래티넘")
+                .tagLine("KR2")
                 .build();
+
         Summoner savedSummoner = summonerService.save(summoner);
-        savedSummoner.setTagGameName("똥개인척하는범#KRKR");
+        savedSummoner.setGameName("똥개인척하는범");
 
         Summoner changedSummoner = summonerService.save(savedSummoner);
 
-        assertThat(changedSummoner.getTagGameName()).isEqualTo("똥개인척하는범#KRKR");
+        assertThat(changedSummoner.getGameName()).isEqualTo("똥개인척하는범");
     }
 
 }

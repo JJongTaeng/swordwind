@@ -10,6 +10,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"gameName", "tagLine"})
+})
 public class Summoner {
 
     @Id
@@ -18,19 +21,19 @@ public class Summoner {
     private Long id;
 
     @Builder
-    public Summoner(String puuid, String summonerName, String tagGameName) {
+    public Summoner(String puuid, String gameName, String tagLine) {
         this.puuid = puuid;
-        this.summonerName = summonerName;
-        this.tagGameName = tagGameName;
+        this.gameName = gameName;
+        this.tagLine = tagLine;
     }
 
     public void removeAllSpace() {
         puuid = puuid.replaceAll("\\s", "");
-        summonerName = summonerName.replaceAll("\\s", "");
-        tagGameName = tagGameName.replaceAll("\\s", "");
+        gameName = gameName.replaceAll("\\s", "");
     }
 
+    @Column(unique = true)
     private String puuid;
-    private String summonerName;
-    private String tagGameName;
+    private String gameName;
+    private String tagLine;
 }

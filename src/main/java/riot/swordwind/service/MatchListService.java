@@ -7,6 +7,7 @@ import riot.swordwind.dto.RiotIdResponseDto;
 import riot.swordwind.entity.Summoner;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,18 +17,18 @@ public class MatchListService {
     private final RiotApiService riotApiService;
 
     public ArrayList<String> findMatchIdList(String gameName, String tagLine) {
-        ResponseEntity<RiotIdResponseDto> riotIdResponse = riotApiService.requestFindRiotIdByGameNameTag(gameName, tagLine);
-        RiotIdResponseDto riotDto = riotIdResponse.getBody();
-        Summoner summoner = Summoner.builder()
-                .puuid(riotDto.getPuuid())
-                .summonerName("")
-                .tagGameName(riotDto.getGameName() + "#" + riotDto.getTagLine())
-                .build();
-
-        summonerService.save(summoner);
-
-        ResponseEntity<ArrayList> matchListResponse = riotApiService.requestFindMatchList(summoner.getPuuid());
-        return matchListResponse.getBody();
-
+        String puuid;
+        Optional<Summoner> byGameNameAndTagLine = summonerService.findByGameNameAndTagLine(gameName, tagLine);
+        if (byGameNameAndTagLine.isEmpty()) {
+            ResponseEntity<RiotIdResponseDto> riotIdResponse = riotApiService.requestFindRiotIdByGameNameTag(gameName, tagLine);
+            RiotIdResponseDto riotDto = riotIdResponse.getBody();
+            puuid = riotDto.getPuuid();
+            ResponseEntity<ArrayList> matchListResponse = riotApiService.requestFindMatchList(puuid);
+            return matchListResponse.getBody();
+        } else {
+            puuid = byGameNameAndTagLine.get().getPuuid();
+            ResponseEntity<ArrayList> matchListResponse = riotApiService.requestFindMatchList(puuid);
+            return matchListResponse.getBody();
+        }
     }
 }

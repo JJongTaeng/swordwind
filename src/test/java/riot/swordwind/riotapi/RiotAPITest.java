@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import riot.swordwind.dto.MatchDetailResponseDto;
 import riot.swordwind.dto.RiotIdResponseDto;
-import riot.swordwind.dto.SummonerResponseDto;
 import riot.swordwind.service.RiotApiService;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,15 +23,6 @@ public class RiotAPITest {
         this.riotAPIService = riotAPIService;
     }
 
-    @Test
-    @DisplayName("Riot Summoner API 200")
-    public void findSummonerNameSuccess() {
-        ResponseEntity<SummonerResponseDto> response = riotAPIService.requestFindSummonerBySummonerName("자조용해");
-
-        System.out.println("response = " + response);
-        HttpStatusCode statusCode = response.getStatusCode();
-        assertThat(statusCode).isEqualTo(HttpStatusCode.valueOf(200));
-    }
 
     @Test
     @DisplayName("Riot Id API 200")
@@ -46,9 +36,13 @@ public class RiotAPITest {
 
 
     @Test
-    @DisplayName("error Riot Summoner API")
-    public void findSummonerNameNotFound() {
-        assertThrows(HttpClientErrorException.class, () -> riotAPIService.requestFindSummonerBySummonerName("자조용해2"));
+    @DisplayName("Riot Id API 200")
+    public void findRiotIdByPuuidSuccess() {
+        ResponseEntity<RiotIdResponseDto> response = riotAPIService.requestFindRiotIdByPuuid("P1egkzgy4Vv4-9A9HN5yfR2HAj9lowvO6UwBYt5DeGBtHBTNBFmC83Xo-HbshP5y2eVOc1KF4tY6YA");
+
+        System.out.println("response = " + response.getBody());
+        HttpStatusCode statusCode = response.getStatusCode();
+        assertThat(statusCode).isEqualTo(HttpStatusCode.valueOf(200));
     }
 
     @Test

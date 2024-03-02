@@ -10,4 +10,5 @@ import java.util.ArrayList;
 public class InfoDto {
     private String gameMode;
     private ArrayList<ParticipantDto> participants;
+    private Long gameEndTimestamp;
 }

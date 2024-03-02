@@ -13,4 +13,5 @@ public class ParticipantDto {
     private Integer kills;
     private Integer deaths;
     private Integer assists;
+    private Integer teamId;
 }
