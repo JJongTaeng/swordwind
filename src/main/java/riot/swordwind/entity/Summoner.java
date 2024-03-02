@@ -30,7 +30,7 @@ public class Summoner {
         tagGameName = tagGameName.replaceAll("\\s", "");
     }
 
-    private String puuid = "";
-    private String summonerName = "";
-    private String tagGameName = "";
+    private String puuid;
+    private String summonerName;
+    private String tagGameName;
 }

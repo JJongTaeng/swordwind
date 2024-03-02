@@ -14,6 +14,7 @@ public class MatchDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String matchId;
     private String puuid;
     private String gameMode;
     private Long gameEndTimestamp;
