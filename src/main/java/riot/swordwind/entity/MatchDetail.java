@@ -18,12 +18,15 @@ public class MatchDetail {
     private Long id;
 
     @Builder
-    public MatchDetail(String matchId, String puuid, Integer teamId, String gameMode, Long gameEndTimestamp, Integer kills, Integer assists, Integer deaths, Long totalDamageDealtToChampions, Long totalDamageTaken, Long totalHeal) {
+    public MatchDetail(String matchId, String gameMode, String puuid, String gameName, String tagLine, Integer teamId, Long gameEndTimestamp, String championName, Integer kills, Integer assists, Integer deaths, Long totalDamageDealtToChampions, Long totalDamageTaken, Long totalHeal) {
         this.matchId = matchId;
-        this.puuid = puuid;
-        this.teamId = teamId;
         this.gameMode = gameMode;
+        this.puuid = puuid;
+        this.gameName = gameName;
+        this.tagLine = tagLine;
+        this.teamId = teamId;
         this.gameEndTimestamp = gameEndTimestamp;
+        this.championName = championName;
         this.kills = kills;
         this.assists = assists;
         this.deaths = deaths;
@@ -35,8 +38,11 @@ public class MatchDetail {
     private String matchId;
     private String gameMode;
     private String puuid;
+    private String gameName;
+    private String tagLine;
     private Integer teamId;
     private Long gameEndTimestamp;
+    private String championName;
     private Integer kills;
     private Integer assists;
     private Integer deaths;

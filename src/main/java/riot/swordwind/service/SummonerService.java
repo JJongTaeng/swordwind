@@ -19,20 +19,26 @@ public class SummonerService {
         return summonerRepository.findById(id);
     }
 
-    public Summoner findByPuuid(String puuid) {
+    public Summoner findByPuuidWithRiotApi(String puuid) {
         Optional<Summoner> optionalSummoner = summonerRepository.findByPuuid(puuid);
         if (optionalSummoner.isEmpty()) {
             ResponseEntity<RiotIdResponseDto> response = riotApiService.requestFindRiotIdByPuuid(puuid);
             RiotIdResponseDto responseBody = response.getBody();
-
-            return Summoner
+            Summoner summoner = Summoner
                     .builder()
                     .tagLine(responseBody.getTagLine())
                     .gameName(responseBody.getGameName())
                     .puuid(responseBody.getPuuid())
                     .build();
+            summonerRepository.save(summoner);
+
+            return summoner;
         }
-        return null;
+        return optionalSummoner.get();
+    }
+
+    public Optional<Summoner> findByPuuid(String puuid) {
+        return summonerRepository.findByPuuid(puuid);
     }
 
     public Optional<Summoner> findByGameNameAndTagLine(String gameName, String tagLine) {

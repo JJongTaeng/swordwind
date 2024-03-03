@@ -23,7 +23,7 @@ public class SummonerSearchContainer {
     @GetMapping("/puuid/{puuid}")
     public ResponseEntity<ApiResponse<Summoner>> searchSummoner(@PathVariable String puuid) {
         try {
-            Summoner summoner = summonerService.findByPuuid(puuid);
+            Summoner summoner = summonerService.findByPuuidWithRiotApi(puuid);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new ApiResponse<>(ResponseMessage.OK.getMessage(), summoner));
