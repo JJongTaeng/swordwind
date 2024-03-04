@@ -1,15 +1,13 @@
 package riot.swordwind.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"gameName", "tagLine"})
 })

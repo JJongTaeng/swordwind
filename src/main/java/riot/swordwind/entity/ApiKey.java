@@ -18,8 +18,11 @@ public class ApiKey {
 
     private String code;
 
-    public ApiKey(Long id, String code) {
-        this.id = id;
+    public ApiKey(String code) {
+        this.code = code;
+    }
+
+    public void setCode(String code) {
         this.code = code;
     }
 }

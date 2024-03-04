@@ -24,7 +24,8 @@ public class RiotApiService {
     private void init() {
         Optional<ApiKey> optionalApiKey = apiKeyRepository.findById(1L);
 
-        ApiKey apiKey = optionalApiKey.orElse(new ApiKey(1L, "RGAPI-5c2dffde-cca4-4a0d-9d3c-de5804a6299c"));
+        ApiKey apiKey = optionalApiKey.orElse(new ApiKey("RGAPI-5c2dffde-cca4-4a0d-9d3c-de5804a6299c"));
+        apiKeyRepository.save(apiKey);
         API_KEY = apiKey.getCode();
     }
 

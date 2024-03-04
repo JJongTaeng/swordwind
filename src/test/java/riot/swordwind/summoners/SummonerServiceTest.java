@@ -30,7 +30,7 @@ public class SummonerServiceTest {
     @DisplayName("저장한 엔티티와 조회한 엔티티의 이름이 동일")
     public void saveSummonerTest() {
         Summoner summoner = Summoner.builder()
-                .puuid("101010")
+                .puuid("1111")
                 .gameName("그랜드 플래티넘")
                 .tagLine("KR2")
                 .build();
@@ -38,14 +38,14 @@ public class SummonerServiceTest {
         Summoner savedSummoner = summonerService.save(summoner);
         assertThat(savedSummoner.getGameName()).isEqualTo("그랜드플래티넘");
     }
-    
+
     @Test
     @DisplayName("서머너 업데이트 gameName변경")
     public void updateSummonerTest() {
         Summoner summoner = Summoner.builder()
-                .puuid("101010")
+                .puuid("2222")
                 .gameName("그랜드 플래티넘")
-                .tagLine("KR2")
+                .tagLine("KR23")
                 .build();
 
         Summoner savedSummoner = summonerService.save(summoner);
