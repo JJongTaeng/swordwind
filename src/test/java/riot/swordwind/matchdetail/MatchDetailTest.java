@@ -10,6 +10,7 @@ import riot.swordwind.service.MatchDetailService;
 
 import java.util.ArrayList;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
@@ -25,7 +26,14 @@ public class MatchDetailTest {
     @Test
     public void saveMatchDetail() {
         ArrayList<MatchDetail> matchDetails = matchDetailService.findByMatchId("KR_6973313082");
-        Assertions.assertThat(matchDetails).isNotEmpty();
+        assertThat(matchDetails).isNotEmpty();
+    }
+
+    @Test
+    public void isWin() {
+        ArrayList<MatchDetail> matchDetails = matchDetailService.findByMatchId("KR_6973313082");
+        MatchDetail matchDetail = matchDetails.get(0);
+        assertThat(matchDetail.getWin()).isExactlyInstanceOf(Boolean.class);
     }
 
     @Test

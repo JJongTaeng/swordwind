@@ -2,6 +2,7 @@ package riot.swordwind.service;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,14 +19,21 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RiotApiService {
     private final ApiKeyRepository apiKeyRepository;
+
+    @Value("${api.auth.key}")
     private String API_KEY;
 
     @PostConstruct
     private void init() {
         Optional<ApiKey> optionalApiKey = apiKeyRepository.findById(1L);
 
-        ApiKey apiKey = optionalApiKey.orElse(new ApiKey("RGAPI-5c2dffde-cca4-4a0d-9d3c-de5804a6299c"));
-        apiKeyRepository.save(apiKey);
+        if (optionalApiKey.isEmpty()) {
+            ApiKey apiKey = new ApiKey(API_KEY);
+            apiKeyRepository.save(apiKey);
+            return;
+        }
+
+        ApiKey apiKey = optionalApiKey.get();
         API_KEY = apiKey.getCode();
     }
 

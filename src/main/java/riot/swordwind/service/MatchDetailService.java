@@ -40,21 +40,22 @@ public class MatchDetailService {
 
             ParticipantDto participantDto = participantDtos.get(i);
             MatchDetail matchDetail = MatchDetail.builder()
-                    .matchId(matchId)
-                    .puuid(puuid)
-                    .gameName(summoner.getGameName())
-                    .tagLine(summoner.getTagLine())
-                    .teamId(participantDto.getTeamId())
-                    .championName(participantDto.getChampionName())
-                    .kills(participantDto.getKills())
-                    .deaths(participantDto.getDeaths())
-                    .assists(participantDto.getAssists())
-                    .totalHeal(participantDto.getTotalHeal())
-                    .totalDamageTaken(participantDto.getTotalDamageTaken())
-                    .totalDamageDealtToChampions(participantDto.getTotalDamageDealtToChampions())
-                    .gameEndTimestamp(matchDetailResponseDto.getInfo().getGameEndTimestamp())
-                    .gameMode(matchDetailResponseDto.getInfo().getGameMode())
-                    .build();
+                .matchId(matchId)
+                .puuid(puuid)
+                .gameName(summoner.getGameName())
+                .tagLine(summoner.getTagLine())
+                .teamId(participantDto.getTeamId())
+                .win(participantDto.getWin())
+                .championName(participantDto.getChampionName())
+                .kills(participantDto.getKills())
+                .deaths(participantDto.getDeaths())
+                .assists(participantDto.getAssists())
+                .totalHeal(participantDto.getTotalHeal())
+                .totalDamageTaken(participantDto.getTotalDamageTaken())
+                .totalDamageDealtToChampions(participantDto.getTotalDamageDealtToChampions())
+                .gameEndTimestamp(matchDetailResponseDto.getInfo().getGameEndTimestamp())
+                .gameMode(matchDetailResponseDto.getInfo().getGameMode())
+                .build();
 
             MatchDetail saved = matchDetailRepository.save(matchDetail);
             returnList.add(saved);

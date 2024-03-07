@@ -38,7 +38,7 @@ public class RiotAPITest {
     @Test
     @DisplayName("Riot Id API 200")
     public void findRiotIdByPuuidSuccess() {
-        ResponseEntity<RiotIdResponseDto> response = riotAPIService.requestFindRiotIdByPuuid("P1egkzgy4Vv4-9A9HN5yfR2HAj9lowvO6UwBYt5DeGBtHBTNBFmC83Xo-HbshP5y2eVOc1KF4tY6YA");
+        ResponseEntity<RiotIdResponseDto> response = riotAPIService.requestFindRiotIdByPuuid("fYUcF3TWfLzKRU9Wphsk4XbwE5UnO5URO7vufOTaGqskh8tnlk4R-wu0gs9pdKHqhtROmxHEzrl36A");
 
         System.out.println("response = " + response.getBody());
         HttpStatusCode statusCode = response.getStatusCode();
@@ -48,7 +48,7 @@ public class RiotAPITest {
     @Test
     @DisplayName("matchlist api success")
     public void findMatchListIdSuccess() {
-        String puuid = "kP1g5l3oLaxdAjpuyIB7hTdLff-6THnUcs4Zs2deyfLsWM1bmEoLya_oN7chnS8cH8BeG9zwHaArLw";
+        String puuid = "fYUcF3TWfLzKRU9Wphsk4XbwE5UnO5URO7vufOTaGqskh8tnlk4R-wu0gs9pdKHqhtROmxHEzrl36A";
 
         ResponseEntity response = riotAPIService.requestFindMatchList(puuid);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
@@ -57,7 +57,7 @@ public class RiotAPITest {
     @Test
     @DisplayName("matchlist api fail")
     public void findMatchListIdFail() {
-        String puuid = "kP1g5l3oLaxdAjpuyIB7hTdLff-6THnUcs4Zs2deyfLsWM1bmEoLya_oN7chn123123123123S8cH8BeG9zwHaArLw";
+        String puuid = "111111";
 
         assertThrows(HttpClientErrorException.class, () -> riotAPIService.requestFindMatchList(puuid));
     }

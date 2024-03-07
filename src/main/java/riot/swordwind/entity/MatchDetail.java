@@ -18,7 +18,8 @@ public class MatchDetail {
     private Long id;
 
     @Builder
-    public MatchDetail(String matchId, String gameMode, String puuid, String gameName, String tagLine, Integer teamId, Long gameEndTimestamp, String championName, Integer kills, Integer assists, Integer deaths, Long totalDamageDealtToChampions, Long totalDamageTaken, Long totalHeal) {
+    public MatchDetail(String matchId, String gameMode, String puuid, String gameName, String tagLine, Integer teamId, Long gameEndTimestamp, Boolean win, String championName, Integer kills, Integer assists, Integer deaths, Long totalDamageDealtToChampions, Long totalDamageTaken, Long totalHeal) {
+        this.win = win;
         this.matchId = matchId;
         this.gameMode = gameMode;
         this.puuid = puuid;
@@ -42,6 +43,7 @@ public class MatchDetail {
     private String tagLine;
     private Integer teamId;
     private Long gameEndTimestamp;
+    private Boolean win;
     private String championName;
     private Integer kills;
     private Integer assists;
