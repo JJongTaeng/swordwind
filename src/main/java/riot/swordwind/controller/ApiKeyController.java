@@ -13,7 +13,7 @@ import riot.swordwind.response.ResponseMessage;
 import riot.swordwind.service.ApiKeyService;
 
 @RestController
-@RequestMapping("/api/api-key")
+@RequestMapping("/api/swordwind/api-key")
 @RequiredArgsConstructor
 public class ApiKeyController {
 

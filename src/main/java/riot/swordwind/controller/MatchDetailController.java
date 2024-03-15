@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/match-detail") // 이렇게 수정
+@RequestMapping("/api/swordwind/match-detail") // 이렇게 수정
 @RequiredArgsConstructor
 public class MatchDetailController {
 

@@ -14,7 +14,7 @@ import riot.swordwind.response.ResponseMessage;
 import riot.swordwind.service.SummonerService;
 
 @RestController
-@RequestMapping("/api/summoner")
+@RequestMapping("/api/swordwind/summoner")
 @RequiredArgsConstructor
 public class SummonerSearchContainer {
 

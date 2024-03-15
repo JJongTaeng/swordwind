@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/match-list") // 이렇게 수정
+@RequestMapping("/api/swordwind/match-list") // 이렇게 수정
 @RequiredArgsConstructor
 public class MatchListController {
 
